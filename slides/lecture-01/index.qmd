@@ -1,0 +1,16 @@
+---
+title: ""
+subtitle: "1ο μάθημα"
+author: "Αλέξανδρος Ρέκκας"
+date: today
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    logo: logo.jpg
+    footer: ""
+    lang: el
+    incremental: false
+execute:
+  echo: false
+---

@@ -1,0 +1,21 @@
+# Quarto
+docs/
+/.quarto/
+site_libs/
+
+# R
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*~
+*.tmp
+
+rsconnect/

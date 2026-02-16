@@ -1,0 +1,6 @@
+---
+title: "Παρουσιάσεις των μαθημάτων"
+format: html
+---
+
+- [Διάλεξη 1](slides/lecture-01/index.qmd)
