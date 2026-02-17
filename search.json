@@ -158,7 +158,28 @@
     "href": "slides/lecture-01/index.html#πρόβλεψη-1",
     "title": "Εισαγωγή",
     "section": "Πρόβλεψη",
-    "text": "Πρόβλεψη\n\nΤο \\(\\tilde{Y}_j\\) δεν είναι γνωστό.\nΗ πρόβλψη πρέπει να πλαισιωθεί από ένα σφάλμα.\n\nΜια απλή προσέγγιση είναι να προβλέψουμε το \\(\\tilde{Y}_j\\) ως \\(\\hat{Y}_j\\pm s_{\\hat{u}}\\)"
+    "text": "Πρόβλεψη\n\nΤο \\(\\tilde{Y}_j\\) δεν είναι γνωστό.\nΗ πρόβλψη πρέπει να πλαισιωθεί από ένα σφάλμα.\n\nΜια απλή προσέγγιση είναι να προβλέψουμε το \\(\\tilde{Y}_j\\) ως \\(\\hat{Y}_j\\pm s_{\\hat{u}}\\)\n\n\n\n\nΣτη συνέχεια θα δούμε και πιο σωστά διαστήματα εμπιστοσύνης…\n\n\n\nΠλέον μπορούμε να απαντήσουμε στο γονέα."
+  },
+  {
+    "objectID": "slides/lecture-01/index.html#αιτιότητα-3",
+    "href": "slides/lecture-01/index.html#αιτιότητα-3",
+    "title": "Εισαγωγή",
+    "section": "Αιτιότητα",
+    "text": "Αιτιότητα\nΟ διευθυντής του σχολείου δεν ενδιαφέρεται να προβλέψει επιδόσεις.\n\n\nΓια παράδειγμα, αν σε ένα πείραμα:\n\n\\(Χ = 1\\) είναι η απόφαση να διαιρεθούν τα τμήματα\n\\(X=0\\) είναι να μη διαιρεθούν τα τμήματα\n\nτότε η αιτιακή επίδραση της απόφασης αυτής στις επιδόσεις των μαθητών \\(Y\\) είναι:\n\\[\nE\\{Y|Χ=1\\} - E\\{Y|Χ=0\\}\n\\]"
+  },
+  {
+    "objectID": "slides/lecture-01/index.html#αιτιότητα-4",
+    "href": "slides/lecture-01/index.html#αιτιότητα-4",
+    "title": "Εισαγωγή",
+    "section": "Αιτιότητα",
+    "text": "Αιτιότητα\nΑν η \\(X\\) είναι συνεχής, τότε η \\(\\beta_1\\) ερμηνεύεται ως η αιτιακή επίδραση μίας μοναδιαίας μεταβολής της \\(X\\), υπό τρεις προϋποθέσεις:\n\n\n\n\\(E\\{u_i|X_i\\} = 0\\)\nΤα \\((X_i, Y_i)\\) είναι ανεξάρτητες και ισόνομες τυχαίες μεταβλητές.\nΗ ύπαρξη έκτοπων παρατηρήσεων (outlier) είναι σχεδόν απίθανη."
+  },
+  {
+    "objectID": "slides/lecture-01/index.html#αιτιότητα-5",
+    "href": "slides/lecture-01/index.html#αιτιότητα-5",
+    "title": "Εισαγωγή",
+    "section": "Αιτιότητα",
+    "text": "Αιτιότητα\n\n\nΚώδικας προσομοίωσης\nset.seed(42)\n\nn_observations &lt;- 100\nn_repetitions &lt;- 800\nslopes &lt;- numeric(n_repetitions)\n\nfor (i in seq_len(n_repetitions)) {\n\n  X &lt;- runif(n_observations, min = 0, max = 1)\n  Y &lt;- -0.5 + 0.4 * X + rnorm(n_observations, sd = .2)\n  \n  linear_regression_model &lt;- lm(Y ~ X)\n  slopes[i] &lt;- coef(linear_regression_model)[\"X\"]\n}"
   },
   {
     "objectID": "exercises-index.html",
