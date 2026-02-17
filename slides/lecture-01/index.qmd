@@ -13,7 +13,7 @@ format:
     incremental: false
     font-size: 32px
 execute:
-  echo: false
+  echo: true
 ---
 
 ## Με τι ασχολείται η οικονομετρία;
@@ -228,3 +228,84 @@ $$
 - Η πρόβλψη πρέπει να πλαισιωθεί από ένα σφάλμα.
 
 Μια απλή προσέγγιση είναι να προβλέψουμε το $\tilde{Y}_j$ ως $\hat{Y}_j\pm s_{\hat{u}}$
+
+\
+\
+
+> Στη συνέχεια θα δούμε και πιο σωστά διαστήματα εμπιστοσύνης...
+
+\
+
+_Πλέον μπορούμε να απαντήσουμε στο γονέα._
+
+## Αιτιότητα
+
+Ο διευθυντής του σχολείου δεν ενδιαφέρεται να προβλέψει επιδόσεις.
+
+\
+
+Για παράδειγμα, αν σε ένα πείραμα:
+
+- $Χ = 1$ είναι η απόφαση να διαιρεθούν τα τμήματα
+- $X=0$ είναι να μη διαιρεθούν τα τμήματα
+
+τότε η αιτιακή επίδραση της απόφασης αυτής στις επιδόσεις των μαθητών $Y$ είναι:
+
+$$
+E\{Y|Χ=1\} - E\{Y|Χ=0\}
+$$
+
+## Αιτιότητα
+
+Αν η $X$ είναι συνεχής, τότε η $\beta_1$ ερμηνεύεται ως η αιτιακή επίδραση μίας
+μοναδιαίας μεταβολής της $X$, υπό τρεις προϋποθέσεις:
+
+\
+
+1. $E\{u_i|X_i\} = 0$
+2. Τα $(X_i, Y_i)$ είναι ανεξάρτητες και ισόνομες τυχαίες μεταβλητές.
+3. Η ύπαρξη έκτοπων παρατηρήσεων (outlier) είναι σχεδόν απίθανη.
+
+## Αιτιότητα
+
+```{r}
+#| code-fold: true
+#| code-summary: "Κώδικας προσομοίωσης"
+#| max-width: none
+
+set.seed(42)
+
+n_observations <- 100
+n_repetitions <- 800
+slopes <- numeric(n_repetitions)
+
+for (i in seq_len(n_repetitions)) {
+
+  X <- runif(n_observations, min = 0, max = 1)
+  Y <- -0.5 + 0.4 * X + rnorm(n_observations, sd = .2)
+  
+  linear_regression_model <- lm(Y ~ X)
+  slopes[i] <- coef(linear_regression_model)["X"]
+}
+```
+
+```{r}
+#| echo: false
+#| dev: "svglite"
+
+library(ggplot2)
+
+ggplot(data.frame(slopes), aes(x = slopes)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "white") +
+  geom_vline(xintercept = 0.4, color = "red", linewidth = 1, linetype = "dashed") +
+  annotate("text", x = 0.4, y = Inf, label = "Πραγματική κλίση = 0.4",
+           color = "red", hjust = -0.1, vjust = 1.5, size = 4) +
+  labs(
+    title = "Δειγματική κατανομή του εκτιμητή OLS",
+    x = "Εκτιμώμενη κλίση",
+    y = "Συχνότητα"
+  ) +
+  theme_minimal(base_size = 16)
+
+```
+
